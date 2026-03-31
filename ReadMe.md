@@ -117,8 +117,10 @@ Uvicorn running on http://0.0.0.0:8000
 `GET /`
 ```json
 {
-  \"message\": \"Translation API - LibreTranslate\",
-  \"docs\": \"/docs\"
+  "message": "Translation API - LibreTranslate",
+  "service": "LibreTranslate (self-hosted)",
+  "docs": "/docs",
+  "status": "running"
 }
 ```
 
@@ -227,7 +229,7 @@ curl -H "X-API-Key: my-secret-api-key-123" http://localhost:8000/languages
 curl -H "X-API-Key: my-secret-api-key-123" http://localhost:8000/languages/detailed
 ```
 **or just use Swagger UI**
-# http://127.0.0.1:8000/docs
+http://127.0.0.1:8000/docs
 
 | Problem | Possible Cause | Solution |
 |---------|----------------|----------|
@@ -269,7 +271,7 @@ syscall_translation_API/
 
 | Member | Role | Contributions |
 |--------|------|---------------|
-| Marcos, Russel E. | Student | Complete end to end development of the Translation API|
+| Marcos, Russel E. | Student | Complete end-to-end development of the Translation API|
 | Martin, Aiza |  |  |
 | Omipet, Sairen |  |  |
 | Raras, Debbie |  |  |
