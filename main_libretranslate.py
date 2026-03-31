@@ -34,17 +34,15 @@ def rate_limit(request: Request):
     now = datetime.now()
     minute_ago = now - timedelta(minutes=1)
     
-    # Clean old requests
     request_counts[client_ip] = [
         timestamp for timestamp in request_counts[client_ip]
         if timestamp > minute_ago
     ]
     
-    # Check limit
     if len(request_counts[client_ip]) >= RATE_LIMIT:
         raise HTTPException(
             status_code=429,
-            detail=f"Naughty Boy, Rate limit exceeded. Maximum {RATE_LIMIT} requests per minute."
+            detail=f"Rate limit exceeded. Maximum {RATE_LIMIT} requests per minute."
         )
     
     request_counts[client_ip].append(now)
