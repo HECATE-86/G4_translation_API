@@ -88,12 +88,12 @@ pip install libretranslate
 
 ### 3. Create .env
 ```
-API_KEY=my-secret-api-key-123 /You can change this on your prefered API Key/
+API_KEY=my-secret-api-key-123 /You can change this to your prefered API Key/
 ```
 
 ## Running (2 Terminals Required)
 
-**Terminal 1 - LibreTranslate (downloads models first time ~30min, might be faster or will take more time depending on internet speed):**
+**Terminal 1 - LibreTranslate (downloads models first time ~30min, might be faster or will take more time depending on the internet speed):**
 ```bash
 libretranslate --host 127.0.0.1 --port 5000
 ```
@@ -197,7 +197,7 @@ Returns full language data including translation targets (what languages you can
 - 401 on invalid/missing
 
 ## Rate Limiting
-- 5 requests/minute per IP (you can set this per minute, per second, per day and the request number)
+- 5 requests/minute per IP (you can configure this part. Set it to "number of tries per second/minute/hour/day)
 - 429 on exceed
 - In-memory tracking
 
@@ -229,6 +229,23 @@ curl -H "X-API-Key: my-secret-api-key-123" http://localhost:8000/languages/detai
 **or just use Swagger UI**
 # http://127.0.0.1:8000/docs
 
+| Problem | Possible Cause | Solution |
+|---------|----------------|----------|
+| **`LibreTranslate not running` error** | LibreTranslate service not started | Run `libretranslate --host 127.0.0.1 --port 5000` in Terminal 1 |
+| **`Connection refused` error** | Wrong port or service not running | Check Terminal 1 shows `Running on http://127.0.0.1:5000` |
+| **401 Unauthorized** | Wrong or missing API key | Verify `.env` file contains `API_KEY=my-secret-api-key-123` |
+| **429 Rate Limit Exceeded** | Too many requests in 1 minute | Wait 60 seconds before trying again |
+| **Translation takes too long (first run)** | Downloading language models | Wait 30-60 minutes for models to download (one-time only) |
+| **Translation takes too long (after first run)** | LibreTranslate may be frozen | Restart Terminal 1 (Ctrl+C, then run again) |
+| **ModuleNotFoundError** | Missing Python packages | Run `pip install -r requirements.txt` |
+| **`uvicorn: command not found`** | Virtual environment not activated | Run `venv\Scripts\activate` (Windows) or `source venv/bin/activate` (Mac/Linux) |
+| **Port 8000 already in use** | Another app using the port | Change port: `uvicorn main_libretranslate:app --port 8001` |
+| **Port 5000 already in use** | Another app using the port | Change port: `libretranslate --host 127.0.0.1 --port 5001` |
+| **Swagger UI not loading** | FastAPI not running | Check Terminal 2 shows `Application startup complete` |
+| **Pyright warnings in Sublime** | Type checker warnings (harmless) | Create `pyrightconfig.json` or ignore them |
+| **`No module named 'cgi'` error** | Python 3.13 incompatibility | We use LibreTranslate (compatible) instead of googletrans |
+| **Models not downloading** | Internet connection issue | Check internet connection, restart LibreTranslate |
+
 ## Project Structure
 ```
 syscall_translation_API/
@@ -248,13 +265,16 @@ syscall_translation_API/
 4. **Two Terminals**: One to run the translation service and one to run the API.
 5. **googletrans Avoided**: Compat issues with googletrans, thus I stuck with LibreTranslate.
 
-## Team Member and Contribution
-Marcos, Russel E. 
-//Martin, Aiza
-//Omipet, Sairen
-//Raras, Debbie
-//Ngados, Alma
-//Dawayen, Jan
+## Team Members & Contributions
+
+| Member | Role | Contributions |
+|--------|------|---------------|
+| Marcos, Russel E. | Student | Complete end to end development of the Translation API|
+| Martin, Aiza |  |  |
+| Omipet, Sairen |  |  |
+| Raras, Debbie |  |  |
+| Ngados, Alma |  |  |
+| Dawayen, Jan | | |
 
 ## License
 Educational project for ITP 322 - Systems Integration and Architecture 2.
