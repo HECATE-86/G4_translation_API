@@ -88,7 +88,7 @@ pip install libretranslate
 
 ### 3. Create .env
 ```
-API_KEY=my-secret-api-key-123 /You can change this to your prefered API Key/
+API_KEY=my-secret-api-key-123 /You can change this to your preferred API Key/
 ```
 
 ## Running (2 Terminals Required)
@@ -231,6 +231,25 @@ curl -H "X-API-Key: my-secret-api-key-123" http://localhost:8000/languages/detai
 **or just use Swagger UI**
 http://127.0.0.1:8000/docs
 
+## Project Structure
+```
+syscall_translation_API/
+├── main_libretranslate.py    # FastAPI app
+├── requirements.txt          # Deps
+├── README.md                 # This file
+├── .env                      # API key
+├── pyrightconfig.json        # Type checking
+└── venv/                     # Virtual env
+```
+
+## Challenges & Solutions/ Troubleshooting
+
+1. **Pyright Warnings**: Added `pyrightconfig.json`, null checks.
+2. **Python 3.13 Compat**: Used latest httpx/LibreTranslate.
+3. **LibreTranslate Download**: Documented one-time setup.
+4. **Two Terminals**: One to run the translation service and one to run the API.
+5. **googletrans Avoided**: Compat issues with googletrans, thus I stuck with LibreTranslate.
+
 | Problem | Possible Cause | Solution |
 |---------|----------------|----------|
 | **`LibreTranslate not running` error** | LibreTranslate service not started | Run `libretranslate --host 127.0.0.1 --port 5000` in Terminal 1 |
@@ -247,25 +266,6 @@ http://127.0.0.1:8000/docs
 | **Pyright warnings in Sublime** | Type checker warnings (harmless) | Create `pyrightconfig.json` or ignore them |
 | **`No module named 'cgi'` error** | Python 3.13 incompatibility | We use LibreTranslate (compatible) instead of googletrans |
 | **Models not downloading** | Internet connection issue | Check internet connection, restart LibreTranslate |
-
-## Project Structure
-```
-syscall_translation_API/
-├── main_libretranslate.py    # FastAPI app
-├── requirements.txt          # Deps
-├── README.md                 # This file
-├── .env                      # API key
-├── pyrightconfig.json        # Type checking
-└── venv/                     # Virtual env
-```
-
-## Challenges & Solutions
-
-1. **Pyright Warnings**: Added `pyrightconfig.json`, null checks.
-2. **Python 3.13 Compat**: Used latest httpx/LibreTranslate.
-3. **LibreTranslate Download**: Documented one-time setup.
-4. **Two Terminals**: One to run the translation service and one to run the API.
-5. **googletrans Avoided**: Compat issues with googletrans, thus I stuck with LibreTranslate.
 
 ## Team Members & Contributions
 
