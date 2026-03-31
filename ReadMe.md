@@ -16,7 +16,7 @@ A production-ready REST API that translates text using [LibreTranslate](https://
 - [Error Handling](#error-handling)
 - [Testing](#testing)
 - [Project Structure](#project-structure)
-- [Challenges & Solutions](#challenges--solutions)
+- [Challenges & Solutions/ Troubleshooting](#challenges--solutions-troubleshooting)
 
 ## Project Overview
 
