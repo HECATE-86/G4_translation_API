@@ -233,7 +233,7 @@ curl -H "X-API-Key: my-secret-api-key-123" http://localhost:8000/languages/detai
 |---------|----------------|----------|
 | **`LibreTranslate not running` error** | LibreTranslate service not started | Run `libretranslate --host 127.0.0.1 --port 5000` in Terminal 1 |
 | **`Connection refused` error** | Wrong port or service not running | Check Terminal 1 shows `Running on http://127.0.0.1:5000` |
-| **401 Unauthorized** | Wrong or missing API key | Verify `.env` file contains `API_KEY=my-secret-api-key-123` |
+| **401 Unauthorized** | Wrong or missing API key | Verify `.env` file contains `API_KEY=my-secret-api-key-123`. Check this part, either you did not put anything or you may have put a different API Key |
 | **429 Rate Limit Exceeded** | Too many requests in 1 minute | Wait 60 seconds before trying again |
 | **Translation takes too long (first run)** | Downloading language models | Wait 30-60 minutes for models to download (one-time only) |
 | **Translation takes too long (after first run)** | LibreTranslate may be frozen | Restart Terminal 1 (Ctrl+C, then run again) |
