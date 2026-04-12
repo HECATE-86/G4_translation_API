@@ -194,11 +194,27 @@ Returns full language data including translation targets (what languages you can
 }
 ```
 
+### 5. Guest Translation (No API Key)
+`POST /guest/translate`
+Endpoint allows users to translate text without needing an API key.
+**Response:**
+```json
+{
+  "original_text": "Hello",
+  "translated_text": "Hola",
+  "source_language": "en",
+  "target_language": "es",
+  "alternatives": null,
+  "service": "libretranslate (guest)"
+}
+```
+
 ## Authentication
 - Header: `X-API-Key: my-secret-api-key-123`
 - 401 on invalid/missing
 
 ## Rate Limiting
+- 30 request/minute
 - 5 requests/minute per IP (you can configure this part. Set it to "number of tries per second/minute/hour/day)
 - 429 on exceed
 - In-memory tracking
@@ -211,6 +227,7 @@ Returns full language data including translation targets (what languages you can
 | 429 | Rate Limit | Too many requests |
 | 503 | Service Unavailable | LibreTranslate down |
 | 504 | Timeout | LibreTranslate slow |
+| 500 | Internal Server Error |
 
 ## Testing
 
@@ -218,6 +235,11 @@ Returns full language data including translation targets (what languages you can
 ```bash
 # Health
 curl -H "X-API-Key: my-secret-api-key-123" http://localhost:8000/health
+
+# Guest translate
+curl -X POST http://localhost:8000/guest/translate \
+-H "Content-Type: application/json" \
+-d '{"text":"Hello","source_language":"en","target_language":"es"}'
 
 # Translate Spanish
 curl -X POST -H "X-API-Key: my-secret-api-key-123" -H "Content-Type: application/json" -d '{"text":"Hello","target_language":"es"}' http://localhost:8000/translate
@@ -273,7 +295,7 @@ syscall_translation_API/
 |--------|------|---------------|
 | Marcos, Russel E. | Student | Complete end-to-end development of the Translation API|
 | Martin, Aiza |  |  |
-| Omipet, Sairen |  |  |
+| Omipet, Sairene |  |  |
 | Raras, Debbie |  |  |
 | Ngados, Alma |  |  |
 | Dawayen, Jan | | |
